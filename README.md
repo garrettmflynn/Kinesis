@@ -1,5 +1,5 @@
 # [Kinesis](https://github.com/Mousai-Neurotechnologies/Kinesis)
-Movement Decoding on the OpenBCI Headset using Automatic Motion Logging
+Streamlined Movement Decoding on OpenBCI Headsets
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
