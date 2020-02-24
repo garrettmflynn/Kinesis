@@ -5,6 +5,6 @@ Movement Decoding on the OpenBCI Headset using Automatic Motion Logging
 
 [![Kinesis YouTube Video](media/KinesisCollage.png)](https://youtu.be/JmtpmnEbmtA) 
  
-**Kinesis** records user movement and automatically assigns labels to co-recorded electroencephalograpy (EEG) data. This allows for rapid development of machine learning (ML) models that decode movement intent from brain data alone. 
+**Kinesis** is a movement decoding pipeline for OpenBCI headsets that integrates automatic motion tracking with real-time signals processing. data alone. 
 
 Note: *Configured for use with the OpenBCI Cyton Daisy Board.*
