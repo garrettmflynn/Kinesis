@@ -8,20 +8,27 @@ import numpy as np
 import pickle
 
 
-# Gather Training and Validation Data
 TAG = 'MOVEMENT'
-STREAM = 'OPENBCI'
-PORT = '/dev/tty.usbserial-DM01N7AE'
+                        # Streams
+                            # OPENBCI
+                            # SYNTHETIC
+STREAM = 'SYNTHETIC' 
+                        # Ports
+                            # Mac: '/dev/tty.usbserial-DM01N7AE'
+                            # Windows: 'COM4'
+                            # Synthetic: None
+PORT = None 
+
 PLOTS = False
 
 # Initialize the Trace
-trace = Trace(id = 'User')
+trace = Trace(id = 'User',tag=TAG)
 
 # Capture New Trace on OpenBCI
 print('Gathering Training and Validation Data...')
 
 if STREAM == 'SYNTHETIC':
-    trace.capture(stream=STREAM,tag=TAG)
+    trace.capture(stream=STREAM)
 elif STREAM == 'OPENBCI':
     trace.capture(stream=STREAM,port=PORT)
 
