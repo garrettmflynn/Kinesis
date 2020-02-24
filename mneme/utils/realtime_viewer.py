@@ -6,11 +6,7 @@ import quantities as pq
 import termios, fcntl, sys, os
 import imutils
 from mneme.utils.realtime_streams import pull_data
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-from flask import Flask, Response
-
+#from mneme.utils import filters
 
 
 ## VIEWS
@@ -67,8 +63,6 @@ class EventManager(object):
                         self.events = np.append(self.events,event,axis=1)
                         self.times = np.append(self.times, time.time() - self.stream_start)  * pq.s
                     
-                    cv2.namedWindow('flow', cv2.WINDOW_FREERATIO) 
-                    cv2.setWindowProperty('flow', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
                     cv2.imshow('flow', vis)
 
                     
@@ -76,7 +70,6 @@ class EventManager(object):
         if self.camera != None:
             self.camera.release()
         cv2.destroyAllWindows()
-
 
 
     def advance(self,key):
@@ -93,8 +86,10 @@ def start_cam():
     cam = cv2.VideoCapture(0)
     ret, prev = cam.read()
     prev = cv2.flip(prev, 1)
-    #prev = imutils.resize(prev, width=800,height=600)
+    prev = imutils.resize(prev, width=800,height=600)
     prevgray = cv2.cvtColor(prev, cv2.COLOR_BGR2GRAY)
+    cv2.namedWindow('flow', cv2.WINDOW_FREERATIO) 
+    cv2.setWindowProperty('flow', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     print('Camera Started')
     return cam, prevgray
 
@@ -141,14 +136,16 @@ def OF(cam,prevgray):
 ## Core Drawing of Optical Flow
 def flow_to_image(img, flow, view,board=None,model=None,categories=None,details=None,performance={}):
 
+
+
+    h, w = img.shape[:2]
+
     THRESHOLD = 5
     SIZE = 5
     STROKE = 7
-    step = 16
+    step = w/50
     x_labels = ['R','L','-']
     y_labels = ['U','D','-']
-
-    h, w = img.shape[:2]
 
     if view == 0:
         img = img
@@ -241,3 +238,4 @@ def flow_to_image(img, flow, view,board=None,model=None,categories=None,details=
     cv2.putText(vis, message, (int(textX),int(textY)), font, SIZE, (236, 206, 131), STROKE, cv2.LINE_AA)
     event = [x_mov,y_mov]
     return vis,event,performance
+
