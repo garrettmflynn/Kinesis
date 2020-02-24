@@ -3,7 +3,7 @@ Movement Decoding on the OpenBCI Headset using Automatic Motion Logging
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-[![Kinesis YouTube Video](KinesisCollage.png)](https://youtu.be/JmtpmnEbmtA) 
+[![Kinesis YouTube Video](media/KinesisCollage.png)](https://youtu.be/JmtpmnEbmtA) 
 
 **Video Introduction:** How to Use Kinesis. 
  
