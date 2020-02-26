@@ -22,6 +22,7 @@ To start the app, run:
 python Kinesis.py
 ```
 
+## Known Bugs
 ### Termios Keylogging (Windows)
 Termios is not compatible with Windows. Since this part of the code only toggles between a black background and live video, please comment this out and continue working with Kinesis.
 
