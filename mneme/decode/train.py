@@ -115,7 +115,6 @@ def get_data(features=None,LABELS=None):
     lengths = [len(training_data[category]) for category in CATEGORIES]
     print(lengths)
 
-    print('Not proper derivation of validation dataset')
     for category in CATEGORIES:
         np.random.shuffle(training_data[category])
         training_data[category] = training_data[category][:min(lengths)]

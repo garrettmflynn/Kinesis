@@ -5,6 +5,7 @@ import time
 import quantities as pq
 import termios, fcntl, sys, os
 import imutils
+import math
 from mneme.utils.realtime_streams import pull_data
 #from mneme.utils import filters
 
@@ -81,7 +82,7 @@ class CameraManager(object):
     def __init__(self):
         self.cam = cv2.VideoCapture(0)
         self.vis = None
-        self.prev = self.get_frame()
+        self.prev = self.get_frame(style='BW')
 
     def __del__(self):
         self.cam.release()
@@ -113,7 +114,7 @@ class CameraManager(object):
     
     def deriveFlow(self):
         # Derive Optical Flow from Webcam
-        gray = self.get_frame('BW')
+        gray = self.get_frame(style='BW')
         self.flow = cv2.calcOpticalFlowFarneback(
             self.prev, gray, None, 0.5, 3, 15, 3, 5, 1.2, 0)
         self.prev = gray
@@ -138,9 +139,13 @@ class CameraManager(object):
         fx, fy = self.flow[y, x].T
         mag = np.sqrt((fx**2) + (fy**2))
         overThresh = mag > THRESHOLD
-        overThresh[overThresh ==0] = None
         fx_to_draw = fx*overThresh
+        x = x.astype('float32')
+        x[fx_to_draw==0] = math.nan
+        fx_to_draw[fx_to_draw==0] = math.nan
+        y = y.astype('float32')
         fy_to_draw = fy*overThresh
+        y[fy_to_draw==0] = math.nan
         lines = np.vstack([x, y, x + fx_to_draw, y + fy_to_draw]).T.reshape(-1, 2, 2)
         lines = np.int32(lines + 0.5)
         self.vis = cv2.cvtColor(self.vis, cv2.COLOR_GRAY2BGR)
