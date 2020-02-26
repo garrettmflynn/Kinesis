@@ -14,10 +14,10 @@ TAG = 'MOVEMENT'
                             # SYNTHETIC
 STREAM = 'SYNTHETIC' 
                         # Ports
-                            # Mac: '/dev/tty.usbserial-DM01N7AE'
+                            # Mac: '/dev/cu.usbserial-DM01N7AE'
                             # Windows: 'COM4'
                             # Synthetic: None
-PORT = None 
+PORT = None
 
 PLOTS = False
 

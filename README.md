@@ -22,10 +22,6 @@ To start the app, run:
 python Kinesis.py
 ```
 
-## Known Bugs
-### Brainflow Port Connection (Mac)
-Brainflow's prepareSession() function does not open the specified port on Mac. When using the Daisy Cyton board, this requires that we *connect to the board using the OpenBCI GUI yet not start the session.* This allows for Brainflow to connect to the Daisy Cyton board.
-
 ### Termios Keylogging (Windows)
 Termios is not compatible with Windows. Since this part of the code only toggles between a black background and live video, please comment this out and continue working with Kinesis.
 
