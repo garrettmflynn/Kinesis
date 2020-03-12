@@ -1,7 +1,7 @@
 # [Kinesis](https://github.com/Mousai-Neurotechnologies/Kinesis)
 Streamlined Movement Decoding on OpenBCI Headsets
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [![Kinesis YouTube Video](media/KinesisCollage.png)](https://youtu.be/JmtpmnEbmtA) 
  
