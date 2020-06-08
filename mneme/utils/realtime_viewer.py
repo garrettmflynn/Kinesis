@@ -26,9 +26,7 @@ class EventManager(object):
         self.delay = 0
         self.stream_start = stream_start
         self.board=board
-        self.performance = {}
-        self.performance['actual'] = {}
-        self.performance['predicted'] = {}
+        self.performance = {'actual': {}, 'predicted': {}}
 
     def movement(self):
         if self.views is None:
@@ -47,7 +45,7 @@ class EventManager(object):
 
 
         if self.views is not None:
-            if self.start == None:
+            if self.start is None:
                 self.start = time.time()
             for view in self.views:
                 if view == 'MOVEMENT':

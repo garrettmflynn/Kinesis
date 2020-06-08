@@ -24,7 +24,7 @@ def train_cnn(features=None,labels=None):
     reshape = (-1, channels, frequencies)
 
     print("split features into training and testing datasets")
-    
+
     # Defining training and test data
     indices = np.arange(len(labels))
     if len(indices)%2 != 0:
@@ -32,7 +32,7 @@ def train_cnn(features=None,labels=None):
     np.random.shuffle(indices)
     train_inds,test_inds = np.split(indices,2)
     traindata,categories = get_data(features=features[:,train_inds,:],LABELS=labels[test_inds])
-    
+
     # Getting training and test data
     train_X = []
     train_y = []
@@ -83,7 +83,7 @@ def train_cnn(features=None,labels=None):
 
     epochs = 10
     batch_size = 32
-    for epoch in range(epochs):
+    for _ in range(epochs):
         model.fit(train_X, train_y, batch_size=batch_size, epochs=1, validation_data=(test_X, test_y))
         score = model.evaluate(test_X, test_y, batch_size=batch_size)
     MODEL_NAME = f"models/{round(score[1]*100,2)}-{epoch}epoch-{int(time.time())}-loss-{round(score[0],2)}.model"
@@ -91,11 +91,7 @@ def train_cnn(features=None,labels=None):
     print("saved:")
     print(MODEL_NAME)
 
-    training_params = {}
-    training_params['categories'] = categories
-    training_params['train_inds'] = train_inds
-    training_params['train_inds'] = test_inds
-
+    training_params = {'categories': categories, 'train_inds': test_inds}
     return model, training_params
 
 def get_data(features=None,LABELS=None):
