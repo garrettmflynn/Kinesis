@@ -19,6 +19,4 @@ def predict(model = None,feature=None,categories = None):
     out = model.predict(network_input)
 
     choice = np.argmax(out)
-    prediction = categories[choice]
-
-    return prediction
+    return categories[choice]

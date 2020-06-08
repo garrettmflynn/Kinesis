@@ -4,12 +4,11 @@ import time
 from brainflow.board_shim import BoardShim, BrainFlowInputParams, LogLevels, BoardIds
 
 def initialize_board(name='SYNTHETIC',port = None):
-    if name == 'SYNTHETIC':
-        BoardShim.enable_dev_board_logger()
-
-        # use synthetic board for demo
+    if name == 'OPENBCI':
+        board_id = BoardIds.CYTON_DAISY_BOARD.value
         params = BrainFlowInputParams()
-        board_id = BoardIds.SYNTHETIC_BOARD.value
+        params.serial_port = port
+        board_id = BoardIds.CYTON_DAISY_BOARD.value
         board = BoardShim(board_id, params)
         board.rate = BoardShim.get_sampling_rate(board_id)
         board.channels = BoardShim.get_eeg_channels(board_id)
@@ -17,12 +16,12 @@ def initialize_board(name='SYNTHETIC',port = None):
         board.eeg_channels = BoardShim.get_eeg_channels(board_id)
         board.accel_channels = BoardShim.get_accel_channels(board_id)
 
-    elif name == 'OPENBCI':
+    elif name == 'SYNTHETIC':
+        BoardShim.enable_dev_board_logger()
 
-        board_id = BoardIds.CYTON_DAISY_BOARD.value
+        # use synthetic board for demo
         params = BrainFlowInputParams()
-        params.serial_port = port
-        board_id = BoardIds.CYTON_DAISY_BOARD.value
+        board_id = BoardIds.SYNTHETIC_BOARD.value
         board = BoardShim(board_id, params)
         board.rate = BoardShim.get_sampling_rate(board_id)
         board.channels = BoardShim.get_eeg_channels(board_id)
@@ -41,9 +40,7 @@ def start_stream(board=None):
     return start_time
 
 def pull_data(board=None,num_samples=450000):
-    data = board.get_current_board_data(num_samples=num_samples)
-
-    return data
+    return board.get_current_board_data(num_samples=num_samples)
 
 def stop_stream(board=None,start_stream=None):
     board.stop_stream()

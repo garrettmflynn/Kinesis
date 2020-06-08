@@ -27,8 +27,8 @@ def analyze(model=None,categories=None):
     argmax_dict = []
     raw_pred_dict = []
     argmax_pct_dict = []
-    for ii in range(len(categories)):
-        argmax, raw_pred, argmax_pct = get_val_data(VALDIR, categories[ii], PRED_BATCH)
+    for category in categories:
+        argmax, raw_pred, argmax_pct = get_val_data(VALDIR, category, PRED_BATCH)
         argmax_dict.append(argmax)
         raw_pred_dict.append(raw_pred)
         argmax_pct_dict.append(argmax_pct)
@@ -58,12 +58,8 @@ def get_val_data(valdir, action, batch_size):
 
     argmax_pct_dict = {}
 
-    for i in argmax_dict:
-        total = 0
-        correct = argmax_dict[i]
-        for ii in argmax_dict:
-            total += argmax_dict[ii]
-
+    for i, correct in argmax_dict.items():
+        total = sum(value_ for ii, value_ in argmax_dict.items())
         argmax_pct_dict[i] = round(correct/total, 3)
 
     return argmax_dict, raw_pred_dict, argmax_pct_dict
